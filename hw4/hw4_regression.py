@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plot
+import matplotlib.legend_handler as legend_handler
 import pandas as pd
 import random
 
@@ -55,22 +56,21 @@ for day in range(0, data.shape[0]):
   x = [1, actual["DAYNUM"][day], actual["TMIN"][day], actual["TAVG"][day]]
   f.append(predict(w, x))
 
+# Draw graph
 graph_x = actual["DATE"]
 y1 = actual["TMAX"]
 
 fig, axes = plot.subplots(nrows=2, ncols=1, sharey=False, sharex=False)
-axes[0].plot(y1)
-axes[0].plot(f)
-plot.sca(axes[0])
-plot.xticks(range(len(graph_x)), graph_x)
 
+# Predictions for 2016
+axes[0].plot(y1, label='Actual data')
+axes[0].plot(f, label='Predicted highs')
+axes[0].set_title('Linear Regression Predictions')
+axes[0].legend()
+
+# Error over time
 axes[1].plot(range(len(err_over_time)), err_over_time)
+axes[1].set_title('Sum Squared Error vs Number of Iterations')
 
 plot.show()
 
-
-# fig, axs = plot.subplots(1, 1, sharey=True)
-# actual.plot(kind='line', x='DATE', y='TMAX', ax=axs[0])
-# data.plot(kind='scatter', x='TMIN', y='TMAX', ax=axs[1])
-# data.plot(kind='scatter', x='TAVG', y='TMAX', ax=axs[2])
-# plot.show()
