@@ -13,8 +13,8 @@ actual["DAYNUM"] = range(len(actual["DATE"].map(str)))
 
 # Generate beginning w array
 w = []
-for i in range(0, 4):
-  w.append(random.uniform(-1, 1))
+for _ in range(0, 4):
+	w.append(random.uniform(-10, 10))
 
 # Hold error over learning iterations
 err_over_time = []
